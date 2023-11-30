@@ -84,7 +84,14 @@ class LinkedList:
         for _ in range(index):
             current = current.next
         
-        return current.value
+        return current
+    
+    def set_value(self, index, value):
+        target_node = self.get(index)
+        if target_node is not None:
+            target_node.value = value
+            return True
+        return False
         
 
 new_linked_list = LinkedList()
@@ -110,4 +117,8 @@ print(new_linked_list.get(0))
 print(new_linked_list.get(99))
 print(new_linked_list.get(8))
 print(new_linked_list.get(7))
+print(new_linked_list.set_value(0, 0))
+print(new_linked_list.set_value(7, 9999))
+print(new_linked_list.set_value(43, 43))
+print(new_linked_list)
 
