@@ -62,23 +62,18 @@ class LinkedList:
     
     def traverse(self):
         current = self.head
-        while current.next is not None:
+        while current is not None:
             print(current.value)
             current = current.next
-        else:
-            print(current.value)
     
     def search(self, target):
         current = self.head
         index = 0
-        while current.next is not None:
+        while current is not None:
             if current.value == target:
                 return (True, index)
             current = current.next
             index += 1
-        else:
-            if current.value == target:
-                return (True, index)
         
         return (False, None)
             
