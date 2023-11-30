@@ -76,7 +76,16 @@ class LinkedList:
             index += 1
         
         return (False, None)
-            
+    
+    def get(self, index):
+        if index >= self.length:
+            return None
+        current = self.head
+        for _ in range(index):
+            current = current.next
+        
+        return current.value
+        
 
 new_linked_list = LinkedList()
 new_linked_list.append(10)
@@ -96,3 +105,9 @@ print(new_linked_list.search(20))
 print(new_linked_list.search("vlribvlruba"))
 print(new_linked_list.search("fake"))
 print(new_linked_list.search(123123))
+print(new_linked_list.get(3))
+print(new_linked_list.get(0))
+print(new_linked_list.get(99))
+print(new_linked_list.get(8))
+print(new_linked_list.get(7))
+
