@@ -65,6 +65,23 @@ class LinkedList:
         while current.next is not None:
             print(current.value)
             current = current.next
+        else:
+            print(current.value)
+    
+    def search(self, target):
+        current = self.head
+        index = 0
+        while current.next is not None:
+            if current.value == target:
+                return (True, index)
+            current = current.next
+            index += 1
+        else:
+            if current.value == target:
+                return (True, index)
+        
+        return (False, None)
+            
 
 new_linked_list = LinkedList()
 new_linked_list.append(10)
@@ -78,4 +95,9 @@ new_linked_list.insert(4, 69)
 print(new_linked_list.length)
 print(new_linked_list)
 new_linked_list.traverse()
-
+print(new_linked_list.search(70))
+print(new_linked_list.search("vlublu"))
+print(new_linked_list.search(20))
+print(new_linked_list.search("vlribvlruba"))
+print(new_linked_list.search("fake"))
+print(new_linked_list.search(123123))
