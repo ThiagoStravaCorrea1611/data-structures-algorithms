@@ -92,6 +92,19 @@ class LinkedList:
             target_node.value = value
             return True
         return False
+    
+    def pop_first(self):
+        target_node = self.head
+        if self.length == 0:
+            return None
+        elif self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = target_node.next
+            target_node.next = None
+        self.length -= 1
+        return target_node
         
 
 new_linked_list = LinkedList()
@@ -121,4 +134,12 @@ print(new_linked_list.set_value(0, 0))
 print(new_linked_list.set_value(7, 9999))
 print(new_linked_list.set_value(43, 43))
 print(new_linked_list)
-
+print(new_linked_list.pop_first())
+print(new_linked_list)
+test_linked_list = LinkedList()
+test_linked_list.append(10)
+print(test_linked_list)
+print(test_linked_list.pop_first())
+print(test_linked_list)
+print(test_linked_list.pop_first())
+print(test_linked_list)
