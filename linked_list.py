@@ -78,7 +78,7 @@ class LinkedList:
         return (False, None)
     
     def get(self, index):
-        if index >= self.length:
+        if (index >= self.length) or (index < 0):
             return None
         current = self.head
         for _ in range(index):
@@ -118,53 +118,42 @@ class LinkedList:
             self.tail.next = None
         self.length -= 1
         return target_node
+    
+    def remove(self, index):
+        if (index < 0) or (index >= self.length):
+            return None
+        elif self.length == 1:
+            self.head = None
+            self.tail = None
+        elif index == 0:
+            target_node = self.head
+            self.head = target_node.next
+            target_node.next = None
+        else:
+            pre_target_node = self.get(index-1)
+            target_node = pre_target_node.next
+            pre_target_node.next = target_node.next
+            target_node.next = None
+            if index == self.length - 1:
+                self.tail = pre_target_node
         
-
+        self.length -= 1
+        
+    def clear(self):
+        self.head = None
+        self.tail = None
+        self.length = 0
+            
+        
 new_linked_list = LinkedList()
 new_linked_list.append(10)
 new_linked_list.append(20)
-new_linked_list.append(70)
-new_linked_list.prepend(40)
-new_linked_list.insert(0, "vlublu")
-new_linked_list.insert(99, "vlribvlruba")
-new_linked_list.insert(2, 42)
-new_linked_list.insert(4, 69)
+new_linked_list.append(30)
+new_linked_list.append(40)
+new_linked_list.append(50)
+print(new_linked_list)
+new_linked_list.clear()
+print(new_linked_list)
+print(new_linked_list.head)
+print(new_linked_list.tail)
 print(new_linked_list.length)
-print(new_linked_list)
-new_linked_list.traverse()
-print(new_linked_list.search(70))
-print(new_linked_list.search("vlublu"))
-print(new_linked_list.search(20))
-print(new_linked_list.search("vlribvlruba"))
-print(new_linked_list.search("fake"))
-print(new_linked_list.search(123123))
-print(new_linked_list.get(3))
-print(new_linked_list.get(0))
-print(new_linked_list.get(99))
-print(new_linked_list.get(8))
-print(new_linked_list.get(7))
-print(new_linked_list.set_value(0, 0))
-print(new_linked_list.set_value(7, 9999))
-print(new_linked_list.set_value(43, 43))
-print(new_linked_list)
-print(new_linked_list.pop_first())
-print(new_linked_list)
-print(new_linked_list.pop_last())
-print(new_linked_list.pop_last())
-print(new_linked_list)
-test_linked_list = LinkedList()
-test_linked_list.append(10)
-print(test_linked_list)
-print(test_linked_list.pop_first())
-print(test_linked_list)
-print(test_linked_list.pop_first())
-print(test_linked_list)
-test_linked_list = LinkedList()
-test_linked_list.append(10)
-test_linked_list.append(20)
-print(test_linked_list)
-print(test_linked_list.pop_last())
-print(test_linked_list)
-print(test_linked_list.pop_last())
-print(test_linked_list.pop_last())
-print(test_linked_list)
