@@ -1,5 +1,4 @@
 
-
 class Node:
     def __init__(self, value):
         self.value = value
@@ -11,7 +10,6 @@ class LinkedList:
         self.tail = None
         self.length = 0
     
-
     def append(self, value):
         new_node = Node(value)
         if self.length == 0:
@@ -158,14 +156,22 @@ class LinkedList:
             current = next_node
         
         self.head, self.tail = self.tail, self.head
+    
+    def remove_duplicates(self):
+        values = []
+        previous = None
+        current = self.head
+        while current is not None:
+            if current.value in values:
+                previous.next = current.next
+                current = current.next
+            else:
+                values.append(current.value)
+                previous = current
+                current = current.next
             
         
 def merge_two_ordered_lists(l1, l2):
-    """
-    :type list1: Optional[ListNode]
-    :type list2: Optional[ListNode]
-    :rtype: Optional[ListNode]
-    """
     pre_head = Node(-101)
     prev = pre_head
     
@@ -183,6 +189,5 @@ def merge_two_ordered_lists(l1, l2):
         prev.next = l1
     else:
         prev.next = l2
-        
     
     return pre_head.next
