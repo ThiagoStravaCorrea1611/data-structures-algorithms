@@ -23,6 +23,10 @@ class LinkedList:
         
         self.length += 1
     
+    def append_list(self, list):
+        for el in list:
+            self.append(el)
+    
     def prepend(self, value):
         new_node = Node(value)
         if self.length == 0:
@@ -143,17 +147,42 @@ class LinkedList:
         self.head = None
         self.tail = None
         self.length = 0
+    
+    def reverse(self):
+        previous = None
+        current = self.head
+        while current is not None:
+            next_node = current.next
+            current.next = previous
+            previous = current
+            current = next_node
+        
+        self.head, self.tail = self.tail, self.head
             
         
-new_linked_list = LinkedList()
-new_linked_list.append(10)
-new_linked_list.append(20)
-new_linked_list.append(30)
-new_linked_list.append(40)
-new_linked_list.append(50)
-print(new_linked_list)
-new_linked_list.clear()
-print(new_linked_list)
-print(new_linked_list.head)
-print(new_linked_list.tail)
-print(new_linked_list.length)
+def merge_two_ordered_lists(l1, l2):
+    """
+    :type list1: Optional[ListNode]
+    :type list2: Optional[ListNode]
+    :rtype: Optional[ListNode]
+    """
+    pre_head = Node(-101)
+    prev = pre_head
+    
+    while l2 and l1:
+        if l1.value <= l2.value:
+            prev.next = l1
+            prev = prev.next
+            l1 = l1.next
+        else:
+            prev.next = l2
+            prev = prev.next
+            l2 = l2.next
+    
+    if l1:
+        prev.next = l1
+    else:
+        prev.next = l2
+        
+    
+    return pre_head.next
