@@ -169,8 +169,17 @@ class LinkedList:
                 values.append(current.value)
                 previous = current
                 current = current.next
-            
+    
+    def copy(self):
+        new_linked_list = LinkedList()
+        current = self.head
+        while current:
+            new_linked_list.append(current.value)
+            current = current.next
         
+        return new_linked_list
+
+# Function to merge two ordered linked lists in a new ordered linked list       
 def merge_two_ordered_lists(l1, l2):
     pre_head = Node(-101)
     prev = pre_head
@@ -191,3 +200,35 @@ def merge_two_ordered_lists(l1, l2):
         prev.next = l2
     
     return pre_head.next
+
+# Function to check if a linked list is a palindrome
+def isPalindrome(linked_list):
+    copy_linked_list = linked_list.copy()
+    head = copy_linked_list.head
+    
+    # Find the middle of the linked list
+    fast = slow = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    
+    # Reverse the second half
+    previous = None
+    current = slow
+    while current:
+        next_node = current.next
+        current.next = previous
+        previous = current
+        current = next_node
+    
+    second_half = previous
+    first_half = head
+    # Compare two halves of linked list
+    while second_half and first_half:
+        if second_half.value == first_half.value:
+            second_half = second_half.next
+            first_half = first_half.next
+        else:
+            return False
+    
+    return True
