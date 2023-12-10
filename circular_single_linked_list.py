@@ -36,28 +36,53 @@ class CircularLinkedList:
         else:
             new_node.next = self.head
             self.head = new_node
-            self.tail.next = self.head
+            self.tail.next = new_node
         
         self.length += 1
     
     def __str__(self):
         temp_node = self.head
-        if self.length == 1:
-            return str(self.head.value)
+        if self.length == 0:
+            return ''
         
         result = ''
-        while temp_node.next != self.head:
+        while temp_node:
             result += str(temp_node.value)
-            if temp_node.next is not None:
-                result += '-->'
+            result += '-->'
             temp_node = temp_node.next
+            if temp_node == self.head:
+                break
         
         return result
+    
+    def insert(self, index, value):
+        if index < 0:
+            return None
+        elif (self.length == 0) or (index >= self.length-1):
+            self.append(value)
+        elif index == 0:
+            self.prepend(value)
+        else:
+            new_node = Node(value)
+            current = self.head
+            for _ in range(index-1):
+                current = current.next
+            displaced_node = current.next
+            current.next = new_node
+            new_node.next = displaced_node
 
 test_circular_linked_list = CircularLinkedList()
+print(test_circular_linked_list)
 test_circular_linked_list.append(1)
 print(test_circular_linked_list)
 test_circular_linked_list.append_list([10, 20, 30, 40, 50])
 print(test_circular_linked_list)
 test_circular_linked_list.prepend(99)
 print(test_circular_linked_list)
+test_circular_linked_list.insert(0, "vlubavluba")
+test_circular_linked_list.insert(99, "varabuba")
+test_circular_linked_list.insert(5, "hurashuha")
+print(test_circular_linked_list)
+print(test_circular_linked_list.head.value)
+print(test_circular_linked_list.tail.value)
+print(test_circular_linked_list.tail.next.value)
